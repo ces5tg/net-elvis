@@ -81,12 +81,11 @@ namespace TodoApi.Controllers
 
             if (usuario == null)
             {
-                Console.WriteLine("Inicio de sesión fallido: Credenciales incorrectas"); // Agregar comentario
+                // Log para inicio de sesión fallido
                 return Unauthorized();
             }
 
-            Console.WriteLine($"Inicio de sesión exitoso: Bienvenido, {usuario.Nombre}"); // Agregar comentario
-
+            // Log para inicio de sesión exitoso
             return Ok(usuario);
         }
     }

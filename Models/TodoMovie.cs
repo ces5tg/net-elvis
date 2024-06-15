@@ -9,9 +9,8 @@ namespace TodoApi.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = string.Empty;
-        
-        public string MovieId   { get; set; }
+        public string Id { get; set; } = string.Empty;       
+        public string MovieId { get; set; } = string.Empty;
         public string? Title { get; set; }
         public List<string>? Generos { get; set; }
         public string? Url { get; set; }

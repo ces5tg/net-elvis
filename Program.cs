@@ -16,6 +16,7 @@ builder.Services.AddSingleton<IMongoClient>(s =>
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IVisualizacionService, VisualizacionService>();
+builder.Services.AddScoped<IReaccionService, ReaccionService>();
 
 // Añadir el servicio del consumidor de Kafka
 builder.Services.AddHostedService<KafkaConsumerService>();

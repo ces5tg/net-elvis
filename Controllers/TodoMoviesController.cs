@@ -39,12 +39,32 @@ namespace TodoApi.Controllers
         }
 
         // POST: api/Movies
-        [HttpPost]
-        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
+        // POST: api/Movies
+[HttpPost]
+public async Task<ActionResult<Movie>> PostMovie(Movie movie)
+{
+    try
+    {
+        // Intenta insertar la película
+        await _movieService.CreateAsync(movie);
+
+        // Verifica si la inserción fue exitosa
+        var insertedMovie = await _movieService.GetAsync(movie.Id);
+        if (insertedMovie == null)
         {
-            await _movieService.CreateAsync(movie);
-            return CreatedAtRoute("GetMovie", new { id = movie.Id }, movie);
+            return StatusCode(500, "Error: La película no se ha insertado correctamente en la base de datos.");
         }
+
+        // Si todo está bien, devuelve una respuesta exitosa junto con la película insertada
+        return CreatedAtRoute("GetMovie", new { id = insertedMovie.Id }, insertedMovie);
+    }
+    catch (Exception ex)
+    {
+        // Captura cualquier excepción y devuelve un mensaje de error
+        return StatusCode(500, $"Error al insertar la película: {ex.Message}");
+    }
+}
+
 
         // PUT: api/Movies/5
         [HttpPut("{id:length(24)}")]

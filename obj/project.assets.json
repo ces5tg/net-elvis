@@ -8974,27 +8974,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rasec\\.nuget\\packages\\": {}
+    "C:\\Users\\nekom\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\6 ciclo\\SR-final-6\\api-elvis\\TodoApi.csproj",
+      "projectUniqueName": "C:\\Users\\nekom\\OneDrive\\Documentos\\API-NET-KAFKA\\net-elvis\\TodoApi.csproj",
       "projectName": "TodoApi",
-      "projectPath": "D:\\6 ciclo\\SR-final-6\\api-elvis\\TodoApi.csproj",
-      "packagesPath": "C:\\Users\\rasec\\.nuget\\packages\\",
-      "outputPath": "D:\\6 ciclo\\SR-final-6\\api-elvis\\obj\\",
+      "projectPath": "C:\\Users\\nekom\\OneDrive\\Documentos\\API-NET-KAFKA\\net-elvis\\TodoApi.csproj",
+      "packagesPath": "C:\\Users\\nekom\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nekom\\OneDrive\\Documentos\\API-NET-KAFKA\\net-elvis\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rasec\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\nekom\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -9074,7 +9071,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

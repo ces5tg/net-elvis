@@ -1,5 +1,6 @@
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,13 +11,15 @@ namespace TodoApi.Models
         private readonly IMongoCollection<Visualizacion> _visualizaciones;
         private readonly IMongoCollection<Movie> _movies;
         private readonly IMongoCollection<Usuario> _usuarios;
+        private readonly ILogger<VisualizacionService> _logger;
 
-        public VisualizacionService(IOptions<TodoDatabaseSettings> settings, IMongoClient client)
+        public VisualizacionService(IOptions<TodoDatabaseSettings> settings, IMongoClient client, ILogger<VisualizacionService> logger)
         {
             var database = client.GetDatabase(settings.Value.DatabaseName);
             _visualizaciones = database.GetCollection<Visualizacion>(settings.Value.VisualizacionCollectionName);
             _movies = database.GetCollection<Movie>(settings.Value.MoviesCollectionName);
             _usuarios = database.GetCollection<Usuario>("Usuarios");
+            _logger = logger;
         }
 
         public async Task<Usuario> GetUsuarioAsync(string idUsuario)
@@ -33,24 +36,27 @@ namespace TodoApi.Models
 
         public async Task CreateAsync(Visualizacion visualizacion)
         {
+            // Elimina la asignación de Id, para que MongoDB lo genere automáticamente
             await _visualizaciones.InsertOneAsync(visualizacion);
+
+            // Actualiza las estadísticas de la película
             await UpdateMovieStatsAsync(visualizacion);
         }
 
-        public async Task UpdateAsync(string id, Visualizacion updatedVisualizacion) =>
+        public async Task UpdateAsync(string id, Visualizacion updatedVisualizacion)
+        {
             await _visualizaciones.ReplaceOneAsync(v => v.Id == id, updatedVisualizacion);
+            await UpdateMovieStatsAsync(updatedVisualizacion);
+        }
 
         public async Task RemoveAsync(string id) =>
             await _visualizaciones.DeleteOneAsync(v => v.Id == id);
 
         private async Task UpdateMovieStatsAsync(Visualizacion visualizacion)
         {
-            var filter = Builders<Movie>.Filter.Eq(m => m.MovieId , visualizacion.IdMovie);
+            var filter = Builders<Movie>.Filter.Eq(m => m.MovieId, visualizacion.IdMovie);
             var update = Builders<Movie>.Update
-                .Inc(m => m.Views, 1)
-                .Inc(m => m.Likes, visualizacion.Like ? 1 : 0)
-                .Inc(m => m.Dislikes, visualizacion.Like ? 0 : 1)
-                .Inc(m => m.AverageView, visualizacion.Rating); // Necesitarás una mejor lógica para el promedio real
+                .Inc(m => m.Views, 1);
 
             await _movies.UpdateOneAsync(filter, update);
         }

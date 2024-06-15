@@ -14,6 +14,9 @@ namespace TodoApi.Models
         public string? Gmail { get; set; } = string.Empty;  // Inicializar con cadena vacía
         public string? Password { get; set; } = string.Empty;  // Inicializar con cadena vacía
 
+
+        public List<string> CategoriasPreferidas { get; set; } = new List<string>();
+
         
     }
     
@@ -25,5 +28,7 @@ namespace TodoApi.Models
 
         [Required(ErrorMessage = "El campo Password es obligatorio.")]
         public required string Password { get; set; }
+
+        
     }
 }

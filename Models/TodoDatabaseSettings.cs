@@ -11,6 +11,8 @@ namespace TodoApi.Models
         public string UsuariosCollectionName { get; set; } = null!;
 
         public string VisualizacionCollectionName { get; set; } = null!;
+
+        public string ReaccionCollectionName { get; set; } = null!;
     }
 
     
